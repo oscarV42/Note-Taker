@@ -1,5 +1,5 @@
 // declaring constants
-const express = requuire('express');
+const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
@@ -72,7 +72,7 @@ app.post(`/api/notes`, (req, res) => {
         const newTip = {
             title, 
             toDo,
-            toDo_id = uuid(),
+            toDo_id: uuid(),
         }
 
         readAndAppend(newTip, './db/db.json');
