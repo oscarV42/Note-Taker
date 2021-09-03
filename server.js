@@ -57,6 +57,25 @@ const readAndAppend = (content, file) => {
 
 // GET Route for retrieving all the notes
 app.get('/api/notes', (req, res) => {
-    console.info(`${req.method} request recieved for notes`);
+    console.info(`${req.method} request received for notes`);
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
-})
+});
+
+// POST Route for a new UX/UI note
+app.post(`/api/notes`, (req, res) => {
+    console.info(`${req.method} request received to add a tip`);
+
+    const { title, toDo } = req.body;
+
+    if(req.body) {
+        const newTip = {
+            title, 
+            toDo,
+        }
+
+        readAndAppend(newTip, './db/db.json');
+        res.json('Noted! ☝️');
+    } else {
+        res.error('Error in adding note');
+    }
+});
