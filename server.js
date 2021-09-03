@@ -69,7 +69,7 @@ const readAndDelete = (id, file) => {
         }else {
             const parsedData = JSON.parse(data);
             const filteredData = (parsedData, id) => {
-                return parsedData.filter(el => el.indexOf(id) !== -1)
+                
             }
             WriteToFile(filteredData(parsedData, id), file);
         }
@@ -84,7 +84,7 @@ app.get('/api/notes', (req, res) => {
 
 // POST Route for a new UX/UI note
 app.post(`/api/notes`, (req, res) => {
-    console.info(`${req.method} request received to add a tip`);
+    console.info(`${req.method} request received to add a note`);
 
     const { title, text } = req.body;
 
@@ -99,6 +99,24 @@ app.post(`/api/notes`, (req, res) => {
         res.json('Noted! ☝️');
     } else {
         res.error('Error in adding note');
+    }
+});
+
+// DELETE route for a removed UI note
+app.delete('/api/notes/:id', (req, res) => {
+    console.info(`${req.method} request received to delete note`);
+
+    const { id } = req.body;
+
+    if(req.body) {
+        const removeId = {
+            id, 
+        }
+
+        readAndDelete(removeId, './db/db.json');
+        res.json('Note Deleted! ☝️');
+    }else {
+        res.error('Error in deleting note');
     }
 });
 
