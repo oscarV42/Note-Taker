@@ -3,7 +3,7 @@ const express = requuire('express');
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
-
+const uuid = require('./helpers/uuid');
 const app = express();
 
 //Middleware for parsing JSON and urlencoded form data
@@ -71,6 +71,7 @@ app.post(`/api/notes`, (req, res) => {
         const newTip = {
             title, 
             toDo,
+            toDo_id = uuid(),
         }
 
         readAndAppend(newTip, './db/db.json');
