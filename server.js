@@ -5,6 +5,7 @@ const fs = require('fs');
 const util = require('util');
 const uuid = require('./helpers/uuid');
 const app = express();
+const PORT = 3001;
 
 //Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
@@ -80,3 +81,7 @@ app.post(`/api/notes`, (req, res) => {
         res.error('Error in adding note');
     }
 });
+
+app.listen(PORT, () => 
+    console.log(`App listening at http://localhost:${PORT}`)
+);
