@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 //GET route for homepage
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'))
 });
 
@@ -56,6 +56,26 @@ const readAndAppend = (content, file) => {
     })
 }
 
+/**
+ *  Function to read data from a given a file and append some content
+ *  @param {object} id The content you want to delete from the file.
+ *  @param {string} file The path to the file you want to save to.
+ *  @returns {void} Nothing
+ */
+const readAndDelete = (id, file) => {
+    fs.readFile(file, 'utf-8', (err, data) => {
+        if(err){
+            console.error(err);
+        }else {
+            const parsedData = JSON.parse(data);
+            const filteredData = (parsedData, id) => {
+                return parsedData.filter(el => el.indexOf(id) !== -1)
+            }
+            WriteToFile(filteredData(parsedData, id), file);
+        }
+    })
+}
+
 // GET Route for retrieving all the notes
 app.get('/api/notes', (req, res) => {
     console.info(`${req.method} request received for notes`);
@@ -66,12 +86,12 @@ app.get('/api/notes', (req, res) => {
 app.post(`/api/notes`, (req, res) => {
     console.info(`${req.method} request received to add a tip`);
 
-    const { title, toDo } = req.body;
+    const { title, text } = req.body;
 
     if(req.body) {
         const newTip = {
             title, 
-            toDo,
+            text,
             toDo_id: uuid(),
         }
 
