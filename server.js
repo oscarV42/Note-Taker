@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const util = require('util');
 const uuid = require('./helpers/uuid');
+const { parse } = require('path');
 const app = express();
 const PORT = 3001;
 
@@ -69,17 +70,43 @@ const readAndDelete = (id, file) => {
         }else {
             const parsedData = JSON.parse(data);
             const filteredData = (parsedData, id) => {
-                
+                var i = 0;
+                while(i < parsedData.length){
+                    if(parsedData[i].includes(id)){
+                        i = parsedData.length;
+                        console.log(i);
+                    }else{
+                        i++;
+                    }
+                }
             }
             WriteToFile(filteredData(parsedData, id), file);
         }
     })
 }
+  
 
 // GET Route for retrieving all the notes
 app.get('/api/notes', (req, res) => {
     console.info(`${req.method} request received for notes`);
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+});
+
+// GET route that returns any specific id
+app.get('/api/notes/:id', (req, res) => {
+    // Coerce the specific search term to lowercase
+    const requestedId = req.params.id;
+    const dataHelper = readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+    // Iterate through the terms name to check if it matches `req.params.term`
+    for (let i = 0; i < dataHelper.length; i++) {
+      if (requestedId === dataHelper[i].id) {
+        return res.json(dataHelper[i]);
+      }else{
+        // Return a message if the term doesn't exist in our DB
+        return res.json('No match found');
+      }
+    }
+  
 });
 
 // POST Route for a new UX/UI note
@@ -92,7 +119,7 @@ app.post(`/api/notes`, (req, res) => {
         const newTip = {
             title, 
             text,
-            toDo_id: uuid(),
+            id: uuid(),
         }
 
         readAndAppend(newTip, './db/db.json');
@@ -105,16 +132,13 @@ app.post(`/api/notes`, (req, res) => {
 // DELETE route for a removed UI note
 app.delete('/api/notes/:id', (req, res) => {
     console.info(`${req.method} request received to delete note`);
-
-    const { id } = req.body;
+    const queryString = req.url;
+    const URLparams = new URLSearchParams(queryString);
+    const id = URLparams.get('id');
 
     if(req.body) {
-        const removeId = {
-            id, 
-        }
-
-        readAndDelete(removeId, './db/db.json');
-        res.json('Note Deleted! ☝️');
+        readAndDelete(id , './db/db.json');
+        res.json(`Note Deleted! ☝️ ${req.url}`);
     }else {
         res.error('Error in deleting note');
     }
