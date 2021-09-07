@@ -82,7 +82,7 @@ const readAndDelete = (id, file) => {
                 return parsedData;
             }
             WriteToFile(file, filteredData(parsedData, id));
-            console.log(filteredData(parsedData, id))
+            console.log(`note ${id} deleted.`);
         }
     })
 }
@@ -135,8 +135,8 @@ app.post(`/api/notes`, (req, res) => {
 app.delete('/api/notes/:id', (req, res) => {
     console.info(`${req.method} request received to delete note`);
     const id = req.url.substring(
-        req.url.lastIndexOf(""), 
-        req.url.lastIndexOf("?") + 1
+        req.url.lastIndexOf("/") + 1, 
+        req.url.lastIndexOf("")
     )
 
     if(req.body) {

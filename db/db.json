@@ -1,1 +1,12 @@
-[]
+[
+    {
+        "title": "Play",
+        "text": "play video games as a break",
+        "id": "b65c"
+    },
+    {
+        "title": "Practice sheet music",
+        "text": "Warmup with scales\nPractice sheet music\nWork on chops",
+        "id": "dd4d"
+    }
+]
