@@ -5,6 +5,9 @@ const fs = require('fs');
 const util = require('util');
 const uuid = require('./helpers/uuid');
 const { parse } = require('path');
+const { URLSearchParams } = require('url');
+const { url } = require('inspector');
+const { request } = require('http');
 const app = express();
 const PORT = 3001;
 
@@ -70,17 +73,16 @@ const readAndDelete = (id, file) => {
         }else {
             const parsedData = JSON.parse(data);
             const filteredData = (parsedData, id) => {
-                var i = 0;
-                while(i < parsedData.length){
-                    if(parsedData[i].includes(id)){
+                for(var i = 0; i < parsedData.length; i++){
+                    if(parsedData[i].id === id){
+                        parsedData.splice(i, 1);
                         i = parsedData.length;
-                        console.log(i);
-                    }else{
-                        i++;
                     }
                 }
+                return parsedData;
             }
-            WriteToFile(filteredData(parsedData, id), file);
+            WriteToFile(file, filteredData(parsedData, id));
+            console.log(filteredData(parsedData, id))
         }
     })
 }
@@ -132,13 +134,14 @@ app.post(`/api/notes`, (req, res) => {
 // DELETE route for a removed UI note
 app.delete('/api/notes/:id', (req, res) => {
     console.info(`${req.method} request received to delete note`);
-    const queryString = req.url;
-    const URLparams = new URLSearchParams(queryString);
-    const id = URLparams.get('id');
+    const id = req.url.substring(
+        req.url.lastIndexOf(""), 
+        req.url.lastIndexOf("?") + 1
+    )
 
     if(req.body) {
         readAndDelete(id , './db/db.json');
-        res.json(`Note Deleted! ☝️ ${req.url}`);
+        res.json(`Note Deleted! ☝️`);
     }else {
         res.error('Error in deleting note');
     }
