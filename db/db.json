@@ -1,12 +1,7 @@
 [
     {
-        "title": "Play",
-        "text": "play video games as a break",
-        "id": "b65c"
-    },
-    {
-        "title": "Practice sheet music",
-        "text": "Warmup with scales\nPractice sheet music\nWork on chops",
-        "id": "dd4d"
+        "title": "Test ",
+        "text": "This is a demo to show the layout of each saved note.\nUse it as a reference for your first note!\nYou can delete this note by pressing the trash icon",
+        "id": "cf0b"
     }
 ]
