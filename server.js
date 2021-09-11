@@ -9,7 +9,7 @@ const { URLSearchParams } = require('url');
 const { url } = require('inspector');
 const { request } = require('http');
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 //Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
