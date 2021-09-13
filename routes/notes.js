@@ -3,13 +3,13 @@ const { readFromFile, readAndAppend, readAndDelete } =  require('../helpers/fsUt
 const  uuid = require('../helpers/uuid');
 
 // GET Route for retrieving all the notes
-app.get('/', (req, res) => {
+notes.get('/', (req, res) => {
     console.info(`${req.method} request received for notes`);
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
 // GET route that returns any specific id
-app.get('/:id', (req, res) => {
+notes.get('/:id', (req, res) => {
     // Coerce the specific search term to lowercase
     const requestedId = req.params.id;
     const dataHelper = readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
@@ -26,7 +26,7 @@ app.get('/:id', (req, res) => {
 });
 
 // POST Route for a new UX/UI note
-app.post(`/api/notes`, (req, res) => {
+notes.post(`/`, (req, res) => {
     console.info(`${req.method} request received to add a note`);
 
     const { title, text } = req.body;
@@ -42,5 +42,21 @@ app.post(`/api/notes`, (req, res) => {
         res.json('Noted! ☝️');
     } else {
         res.error('Error in adding note');
+    }
+});
+
+// DELETE route for a removed UI note
+notes.delete('/api/notes/:id', (req, res) => {
+    console.info(`${req.method} request received to delete note`);
+    const id = req.url.substring(
+        req.url.lastIndexOf("/") + 1, 
+        req.url.lastIndexOf("")
+    )
+
+    if(req.body) {
+        readAndDelete(id , './db/db.json');
+        res.json(`Note Deleted! ☝️`);
+    }else {
+        res.error('Error in deleting note');
     }
 });
