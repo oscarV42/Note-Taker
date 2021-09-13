@@ -54,7 +54,7 @@ const readAndDelete = (id, file) => {
                 }
                 return parsedData;
             }
-            WriteToFile(file, filteredData(parsedData, id));
+            writeToFile(file, filteredData(parsedData, id));
             console.log(`note ${id} deleted.`);
         }
     })
