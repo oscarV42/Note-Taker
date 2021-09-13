@@ -34,7 +34,7 @@ const readAndAppend = (content, file) => {
   };
   
   /**
- *  Function to read data from a given a file and append some content
+ *  Function to read data from a given a file and delete some content
  *  @param {object} id The content you want to delete from the file.
  *  @param {string} file The path to the file you want to save to.
  *  @returns {void} Nothing
@@ -60,3 +60,4 @@ const readAndDelete = (id, file) => {
     })
 }
   
+module.exports = { readFromFile, writeToFile, readAndAppend, readAndDelete };
