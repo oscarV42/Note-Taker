@@ -46,7 +46,7 @@ notes.post(`/`, (req, res) => {
 });
 
 // DELETE route for a removed UI note
-notes.delete('/api/notes/:id', (req, res) => {
+notes.delete('/:id', (req, res) => {
     console.info(`${req.method} request received to delete note`);
     const id = req.url.substring(
         req.url.lastIndexOf("/") + 1, 
