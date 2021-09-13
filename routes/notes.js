@@ -24,3 +24,23 @@ app.get('/:id', (req, res) => {
     }
   
 });
+
+// POST Route for a new UX/UI note
+app.post(`/api/notes`, (req, res) => {
+    console.info(`${req.method} request received to add a note`);
+
+    const { title, text } = req.body;
+
+    if(req.body) {
+        const newTip = {
+            title, 
+            text,
+            id: uuid(),
+        }
+
+        readAndAppend(newTip, './db/db.json');
+        res.json('Noted! ☝️');
+    } else {
+        res.error('Error in adding note');
+    }
+});
