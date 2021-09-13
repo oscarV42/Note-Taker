@@ -3,7 +3,7 @@ const express = require('express');
 // Import our modular route for /notes
 const notesRouter = require('./notes');
 
-const app =express();
+const app = express();
 
 app.use('/notes', notesRouter);
 
