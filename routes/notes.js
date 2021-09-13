@@ -60,3 +60,5 @@ notes.delete('/:id', (req, res) => {
         res.error('Error in deleting note');
     }
 });
+
+module.exports = notes;
