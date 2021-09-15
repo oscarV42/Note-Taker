@@ -57,9 +57,9 @@ Run the following command to run tests:
 
 ## Images
 
-![ScreenShot]('assets\11-express-homework-demo-01.png')
+![ScreenShot](./assets/11-express-homework-demo-01.png)
 
-![ScreenShot2](assets\11-express-homework-demo-02.png)
+![ScreenShot2](./assets/11-express-homework-demo-02.png)
 
 ## Questions
 
