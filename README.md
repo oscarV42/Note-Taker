@@ -19,6 +19,10 @@ end and will save and retrieve note data from a JSON file.
 
 - [Tests](#tests)
 
+- [Images](#images)
+
+- [Application Usage](#application_usage)
+
 - [Questions](#questions)
 
 ## Installation
@@ -38,6 +42,8 @@ Use Node.js command line interface to run application
 Please refer to this demo gif:
 
 ![Demo_REPO](./assets/NoteTaker.gif)
+
+As seen above when you are in your terminal, first download npm dependencies(refer to installation) and start the server by typing in the command line, npm start or node server.js.
 
 ## License
 
@@ -62,6 +68,10 @@ Run the following command to run tests:
 ![ScreenShot](./assets/11-express-homework-demo-01.png)
 
 ![ScreenShot2](./assets/11-express-homework-demo-02.png)
+
+## Application Usage
+
+![Web_Usage](./assets/NoteTakerApp.gif)
 
 ## Questions
 
