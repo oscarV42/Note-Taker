@@ -37,6 +37,8 @@ Use Node.js command line interface to run application
 
 Please refer to this demo gif:
 
+![Demo_REPO](./assets/NoteTaker.gif)
+
 ## License
 
 This project is licensed under the MIT license
