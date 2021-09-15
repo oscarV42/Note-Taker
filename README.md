@@ -21,7 +21,7 @@ end and will save and retrieve note data from a JSON file.
 
 - [Images](#images)
 
-- [Application Usage](#application_usage)
+- [Application Usage](#applicationusage)
 
 - [Questions](#questions)
 
