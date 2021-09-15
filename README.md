@@ -21,7 +21,7 @@ end and will save and retrieve note data from a JSON file.
 
 - [Images](#images)
 
-- [Application Usage](#applicationusage)
+- [Application Usage](#appusage)
 
 - [Questions](#questions)
 
@@ -69,7 +69,7 @@ Run the following command to run tests:
 
 ![ScreenShot2](./assets/11-express-homework-demo-02.png)
 
-## Application Usage
+## appUsage
 
 ![Web_Usage](./assets/NoteTakerApp.gif)
 
